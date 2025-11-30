@@ -69,6 +69,22 @@ pipeline {
                 }
             }
         }
+        
+        stage('Nexus Deploy') {
+            steps {
+                script {
+                    echo '========== Stage: Nexus Artifact Deployment =========='
+                    echo "Packaging and preparing artifacts for Nexus deployment..."
+                }
+                bat '.\\mvnw clean package -DskipTests'
+                script {
+                    echo '========== Artifact Package Created =========='
+                    echo "Artifact: target/BusinessProject-0.0.1-SNAPSHOT.jar"
+                    echo "Ready for deployment to Nexus Repository"
+                    echo "To enable actual deployment, configure distributionManagement in pom.xml"
+                }
+            }
+        }
     }
     
     post {
