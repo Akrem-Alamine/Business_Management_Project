@@ -3,7 +3,8 @@ pipeline {
     
     environment {
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-25'
-        PATH = "${JAVA_HOME}\\bin;${PATH}"
+        M2_HOME = 'C:\\apache-maven-3.9.4'
+        PATH = "${JAVA_HOME}\\bin;${M2_HOME}\\bin;${PATH}"
     }
     
     options {
@@ -33,6 +34,7 @@ pipeline {
                     echo '========== Stage: Maven Clean Build =========='
                     echo "Compiling and packaging the project..."
                 }
+                bat 'if exist .mvn\\wrapper\\maven-wrapper.jar del .mvn\\wrapper\\maven-wrapper.jar'
                 bat '.\\mvnw clean compile -DskipTests'
                 script {
                     echo '========== Build Complete =========='
