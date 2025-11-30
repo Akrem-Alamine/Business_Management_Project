@@ -42,6 +42,19 @@ pipeline {
             }
         }
         
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    echo '========== Stage: SonarQube Code Quality Analysis =========='
+                    echo "Running SonarQube scanner for code quality analysis..."
+                }
+                bat '.\\mvnw sonar:sonar -Dsonar.projectKey=BusinessManagementProject -Dsonar.sources=src/main -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin'
+                script {
+                    echo '========== SonarQube Analysis Complete =========='
+                }
+            }
+        }
+        
         stage('Test') {
             steps {
                 script {
