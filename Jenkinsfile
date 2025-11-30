@@ -33,7 +33,7 @@ pipeline {
                     echo '========== Stage: Maven Clean Build =========='
                     echo "Compiling and packaging the project..."
                 }
-                bat 'mvn clean compile -DskipTests'
+                bat '.\\mvnw clean compile -DskipTests'
                 script {
                     echo '========== Build Complete =========='
                 }
@@ -46,7 +46,7 @@ pipeline {
                     echo '========== Stage: Unit Tests =========='
                     echo "Running ProductServiceTest..."
                 }
-                bat 'mvn test -Dtest=ProductServiceTest'
+                bat '.\\mvnw test -Dtest=ProductServiceTest'
                 script {
                     echo '========== Tests Complete =========='
                 }
