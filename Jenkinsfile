@@ -69,15 +69,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Test Reports') {
-            steps {
-                script {
-                    echo '========== Stage: Publishing Test Reports =========='
-                }
-                junit '**/target/surefire-reports/*.xml'
-            }
-        }
     }
     
     post {
