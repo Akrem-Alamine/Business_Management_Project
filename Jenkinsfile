@@ -1,4 +1,4 @@
-﻿pipeline {
+pipeline {
     agent any
     
     environment {
@@ -74,12 +74,12 @@
         }
         success {
             script {
-                echo ' Pipeline executed successfully!'
+                echo '✅ Pipeline executed successfully!'
             }
         }
         failure {
             script {
-                echo ' Pipeline failed! Check logs above for details.'
+                echo '❌ Pipeline failed! Check logs above for details.'
             }
         }
     }
