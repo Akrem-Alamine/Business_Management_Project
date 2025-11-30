@@ -47,10 +47,12 @@ pipeline {
                 script {
                     echo '========== Stage: SonarQube Code Quality Analysis =========='
                     echo "Running SonarQube scanner for code quality analysis..."
+                    echo "Connecting to SonarQube at http://localhost:9000"
                 }
                 bat '.\\mvnw sonar:sonar -Dsonar.projectKey=BusinessManagementProject -Dsonar.sources=src/main -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin'
                 script {
                     echo '========== SonarQube Analysis Complete =========='
+                    echo 'Code quality analysis results available at: http://localhost:9000'
                 }
             }
         }
