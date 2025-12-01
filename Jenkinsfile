@@ -34,12 +34,8 @@ pipeline {
                     echo '========== Stage: Maven Clean Build =========='
                     echo "Compiling and packaging the project..."
                 }
-                powershell '''
-                    if (Test-Path ".mvn\\wrapper\\maven-wrapper.jar") {
-                        Remove-Item ".mvn\\wrapper\\maven-wrapper.jar" -Force
-                    }
-                '''
-                powershell '.\\mvnw clean compile -DskipTests'
+                sh 'if exist .mvn\\wrapper\\maven-wrapper.jar del .mvn\\wrapper\\maven-wrapper.jar'
+                sh '.\\mvnw clean compile -DskipTests'
                 script {
                     echo '========== Build Complete =========='
                 }
@@ -53,7 +49,7 @@ pipeline {
                     echo "Running SonarQube scanner for code quality analysis..."
                     echo "Connecting to SonarQube at http://localhost:9000"
                 }
-                powershell '.\\mvnw sonar:sonar -Dsonar.projectKey=BusinessManagementProject -Dsonar.sources=src/main -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqa_f91ba8837d3fe097b578d79f16c8794469e3bb95'
+                sh '.\\mvnw sonar:sonar -Dsonar.projectKey=BusinessManagementProject -Dsonar.sources=src/main -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqa_f91ba8837d3fe097b578d79f16c8794469e3bb95'
                 script {
                     echo '========== SonarQube Analysis Complete =========='
                     echo 'Code quality analysis results available at: http://localhost:9000/dashboard?id=BusinessManagementProject'
@@ -67,7 +63,7 @@ pipeline {
                     echo '========== Stage: Unit Tests =========='
                     echo "Running ProductServiceTest..."
                 }
-                powershell '.\\mvnw test -Dtest=ProductServiceTest'
+                sh '.\\mvnw test -Dtest=ProductServiceTest'
                 script {
                     echo '========== Tests Complete =========='
                 }
@@ -80,7 +76,7 @@ pipeline {
                     echo '========== Stage: Nexus Artifact Deployment =========='
                     echo "Packaging and preparing artifacts for Nexus deployment..."
                 }
-                powershell '.\\mvnw clean package -DskipTests'
+                sh '.\\mvnw clean package -DskipTests'
                 script {
                     echo '========== Artifact Package Created =========='
                     echo "Artifact: target/BusinessProject-0.0.1-SNAPSHOT.jar"
