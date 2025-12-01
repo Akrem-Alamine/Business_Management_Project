@@ -23,7 +23,7 @@ pipeline {
                 checkout scm
                 script {
                     echo '========== Git Checkout Complete =========='
-                    bat 'dir'
+                    echo "Repository cloned successfully"
                 }
             }
         }
